@@ -3,14 +3,14 @@ var bodyParser = require("body-parser");
 var exphbs  = require('express-handlebars');
 var path = require("path");
 //controller import
-var htmlRouter = require('./controllers/burgers_controller.js')
+var htmlRouter = require('./controllers/burgers_controller.js');
 
 // For express 
 var app = express();
-var PORT = process.env.PORT || 5000;
+var PORT = process.env.PORT || 8080;
 
 // For bodyparser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // For Handlebars
@@ -21,4 +21,6 @@ app.set('view engine', 'handlebars');
 app.use('/', htmlRouter);
 
 // express listening port
-  app.listen(PORT, function(){});
+app.listen(PORT, function(){
+  console.log("listening on port: " + PORT);
+});

@@ -1,34 +1,62 @@
+<div class="jumbotron">
+      <h1 class="display-3">BURGERS</h1>
+      <p class="lead">Go ahead and add a burger! Eat it when you are ready.</p>
+</div>
 
-<h2>BURGERS!</h2>
+<div class="container">
+     <div class="row">
 
-<h3>Eaten burgers!</h3>
-{{#each allBurgers}}
-    {{#if this.devoured}}
-        <ul>
-            <p>{{this.burger_name}}</p>
-        </ul>
-    {{/if}}
-{{/each}}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <h3 class="panel-heading">Burgers you can eat!</h3>
+                <div class="panel-body">
 
+                {{#each allBurgers}}
+                {{#unless this.devoured}}
+                    <ul>
+                    <p>
+                    <form action="/update/{{this.id}}?_method=PUT" method="POST">
 
-<h3>Burgers you can eat!</h3>
-{{#each allBurgers}}
-    {{#unless this.devoured}}
-        <ul>
-            <p>
-                {{this.burger_name}}
-                <form action="/update/{{this.id}}?_method=PUT" method="POST">
+                    {{this.burger_name}}
+
                     <input type="hidden" name="eating" value="true">
                     <button type="submit">Devour</button>
-                </form>    
-            </p>
-        </ul>
-    {{/unless}}
-{{/each}}
+                    </form>  
+                    </p>
+                    </ul>
+                {{/unless}}
+                {{/each}}
 
+                </div>
+            </div>
+        </div>
 
-<h3>Add new burger</h3>
-<form method="POST" action="/create">
-    <textarea type="text" name="newBurger"></textarea>
-    <button type="submit">Add Burger</button>
-</form>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <h3 class="panel-heading">Add new burger</h3>
+                <div class="panel-body">
+                    <form method="POST" action="/create">
+                        <textarea type="text" name="newBurger"></textarea>
+                        <button type="submit">Add Burger</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <h3 class="panel-heading">Eaten burgers!</h3>
+                    <div class="panel-body">
+                    {{#each allBurgers}}
+                    {{#if this.devoured}}
+                        <ul>
+                        <p>{{this.burger_name}}</p>
+                        </ul>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
